@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adfix — Meta Ads Checklist</title>
+
+  <style>
+    /* ---------- Page basics ---------- */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f4f6f9;
+      color: #1c1e21;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    /* ---------- White card in the middle ---------- */
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .brand {
+      color: #1877f2; /* Meta blue */
+    }
+
+    .intro {
+      margin: 0 0 24px;
+      color: #65676b;
+    }
+
+    /* ---------- Checklist ---------- */
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1px solid #dddfe2;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .item:hover {
+      background: #f0f2f5;
+    }
+
+    .item input {
+      width: 20px;
+      height: 20px;
+      accent-color: #1877f2;
+      cursor: pointer;
+    }
+
+    /* When a box is ticked, the row turns green and the text is crossed out */
+    .item:has(input:checked) {
+      background: #e7f6ec;
+      border-color: #42b72a;
+    }
+
+    .item:has(input:checked) span {
+      text-decoration: line-through;
+      color: #65676b;
+    }
+
+    /* ---------- Progress text ---------- */
+    .progress {
+      margin-top: 18px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .progress.done {
+      color: #42b72a;
+    }
+
+    /* ---------- Footer with your name ---------- */
+    footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid #dddfe2;
+      text-align: center;
+      font-size: 14px;
+      color: #65676b;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <h1><span class="brand">Adfix</span> — Meta Ads Checklist</h1>
+    <p class="intro">Check each item before publishing your ad</p>
+
+    <!-- The five checklist items. Clicking anywhere on a row ticks its box. -->
+    <label class="item">
+      <input type="checkbox">
+      <span>Creative — image or video looks right</span>
+    </label>
+
+    <label class="item">
+      <input type="checkbox">
+      <span>Copy — text is clear, with no typos</span>
+    </label>
+
+    <label class="item">
+      <input type="checkbox">
+      <span>Destination link — URL opens the correct page</span>
+    </label>
+
+    <label class="item">
+      <input type="checkbox">
+      <span>Budget and schedule — amount and dates are set</span>
+    </label>
+
+    <label class="item">
+      <input type="checkbox">
+      <span>Audience — targeting matches your customers</span>
+    </label>
+
+    <p class="progress" id="progress">0 of 5 checked</p>
+
+    <footer>
+      Made by <strong>Nicholas David</strong>
+    </footer>
+  </main>
+
+  <script>
+    // Updates the "X of 5 checked" line whenever a box changes
+    const boxes = document.querySelectorAll('input[type="checkbox"]');
+    const progress = document.getElementById('progress');
+
+    boxes.forEach(box => box.addEventListener('change', () => {
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+      if (checked === boxes.length) {
+        progress.textContent = 'All set — ready to publish!';
+        progress.classList.add('done');
+      } else {
+        progress.textContent = checked + ' of ' + boxes.length + ' checked';
+        progress.classList.remove('done');
+      }
+    }));
+  </script>
+
+</body>
+</html>
